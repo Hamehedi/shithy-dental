@@ -3,9 +3,10 @@
 import { motion } from "framer-motion"
 
 /**
- * The practice mark: a fine-line tooth silhouette cradling a serif "S"
- * whose lower sweep resolves into a calm smile arc, with a single brass
- * point. Drawn as a line-art reveal — restrained, not a cartoon.
+ * The practice mark: a tooth-shaped seal that cradles a confident serif "S"
+ * (for Shithy), with a single brass smile arc resting at the base. The tooth
+ * is the container rather than a cartoon — one boutique emblem, drawn as a
+ * restrained line-art reveal.
  */
 export function LineMark({
   className,
@@ -19,25 +20,40 @@ export function LineMark({
     visible: {
       pathLength: 1,
       opacity: 1,
-      transition: { pathLength: { duration: 1.6, ease: [0.22, 1, 0.36, 1] as const }, opacity: { duration: 0.3 } },
+      transition: {
+        pathLength: { duration: 1.6, ease: [0.22, 1, 0.36, 1] as const },
+        opacity: { duration: 0.3 },
+      },
     },
   }
 
-  const drawLate = {
+  const drawS = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: {
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const, delay: 0.9 },
-        opacity: { duration: 0.3, delay: 0.9 },
+        pathLength: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as const, delay: 0.7 },
+        opacity: { duration: 0.3, delay: 0.7 },
+      },
+    },
+  }
+
+  const drawSmile = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        pathLength: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const, delay: 1.5 },
+        opacity: { duration: 0.3, delay: 1.5 },
       },
     },
   }
 
   return (
     <motion.svg
-      viewBox="0 0 64 64"
+      viewBox="0 0 100 100"
       fill="none"
       className={className}
       aria-hidden="true"
@@ -46,41 +62,29 @@ export function LineMark({
       animate={animate ? undefined : "visible"}
       viewport={{ once: true, amount: 0.6 }}
     >
-      {/* tooth silhouette */}
+      {/* tooth-shaped seal — the container */}
       <motion.path
-        d="M32 9 C23 9 17 15 17 25 C17 34 18 44 21 51 C22 54 25 54 26 49 C27 44 29 41 32 41 C35 41 37 44 38 49 C39 54 42 54 43 51 C46 44 47 34 47 25 C47 15 41 9 32 9 Z"
+        d="M50 12 C33 12 22 23 22 41 C22 58 25 76 31 88 C34 94 41 93 43 82 C44.5 73 47 68 50 68 C53 68 55.5 73 57 82 C59 93 66 94 69 88 C75 76 78 58 78 41 C78 23 67 12 50 12 Z"
         stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
+        strokeWidth="2.2"
         strokeLinejoin="round"
         variants={draw}
       />
-      {/* serif S nested inside the crown */}
+      {/* confident serif S nested in the crown */}
       <motion.path
-        d="M37 19.5 C37 16 28.5 15.5 27.5 18.8 C26.6 21.8 31 23 33.3 23.9 C35.8 24.9 37.8 26.4 36.6 29"
+        d="M60.5 33 C60.5 26.5 47 25.5 44.2 31.5 C41.6 37 49.5 39.6 54 41.7 C59.4 44.1 61.2 49.4 56 54 C51 58.4 41.8 56.6 40 51"
         stroke="currentColor"
-        strokeWidth="1.75"
+        strokeWidth="5"
         strokeLinecap="round"
-        variants={draw}
+        variants={drawS}
       />
-      {/* smile arc — the lower resolve of the S */}
+      {/* brass smile arc resting at the base */}
       <motion.path
-        d="M24.5 33.5 C27.5 37.5 36.5 37.5 39.5 33.5"
+        d="M41 61 C46 66.5 54 66.5 59 61"
         stroke="var(--brass)"
-        strokeWidth="1.75"
+        strokeWidth="3"
         strokeLinecap="round"
-        variants={drawLate}
-      />
-      {/* brass point */}
-      <motion.circle
-        cx="32"
-        cy="13"
-        r="2.1"
-        fill="var(--brass)"
-        initial={animate ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-        whileInView={animate ? { scale: 1, opacity: 1 } : undefined}
-        transition={{ delay: 1.6, duration: 0.4, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.6 }}
+        variants={drawSmile}
       />
     </motion.svg>
   )
