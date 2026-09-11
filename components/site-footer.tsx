@@ -3,6 +3,10 @@ import { LineMark } from "./line-mark"
 import { site } from "@/lib/site"
 import { waLink, waMessages } from "@/lib/whatsapp"
 
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+  "Assure South Castle, Aftabnagar, Dhaka",
+)}&output=embed`
+
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-pine text-bone">
@@ -61,7 +65,19 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-bone/15 pt-6 text-xs text-bone/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 overflow-hidden rounded-sm border border-bone/15">
+          <iframe
+            title="Map to Dr. Shithy's Dental Care, Aftabnagar, Dhaka"
+            src={mapSrc}
+            width="100%"
+            height="220"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="block w-full grayscale-[0.35]"
+          />
+        </div>
+
+        <div className="mt-10 flex flex-col gap-2 border-t border-bone/15 pt-6 text-xs text-bone/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Dr. Shithy&apos;s Dental Care. All rights reserved.</p>
           <p>{site.address.lines.join(", ")}</p>
         </div>
